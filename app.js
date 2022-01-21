@@ -17,6 +17,7 @@ const reviewRouter = require('./routes/reviewRoutes');
 const viewRouter = require('./routes/viewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
 const bookingController = require('./controllers/bookingController');
+const bodyParser = require('body-parser');
 
 // Starting application
 const app = express();
@@ -57,7 +58,7 @@ app.use('/api', limiter);
  NOT JSON!!*/
 app.post(
   '/webhook-checkout',
-  express.raw({ type: 'application/json' }),
+  bodyParser.raw({ type: 'application/json' }),
   bookingController.webhookCheckout
 );
 
