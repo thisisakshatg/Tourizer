@@ -55,7 +55,6 @@ exports.login = (req, res) => {
 
 exports.getAccount = async (req, res) => {
   const user = await User.findById(req.user.id);
-  console.log(user);
   res
     .status(200)
     .set('Content-Security-Policy', csp)
