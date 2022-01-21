@@ -8,7 +8,7 @@ const factory = require('./handlerFactory');
 // const multerStorage = multer.diskStorage({
 //   destination: (req, file, cb) => {
 //     // cb: callbck function, has first argument set to error like in middleware
-//     cb(null, 'public/img/users');
+//     cb(null, 'publics');
 //   },
 //   filename: (req, file, cb) => {
 //     // user-id-timestamp.jpeg =>unique timestamp
@@ -45,7 +45,7 @@ exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
     .resize(500, 500)
     .toFormat('jpeg')
     .jpeg({ quality: 90 })
-    .toFile(`public/img/users/${req.file.filename}`);
+    .toFile(`publics/${req.file.filename}`);
 
   next();
 });
