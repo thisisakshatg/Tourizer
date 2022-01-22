@@ -7,7 +7,6 @@ import { showAlert } from './alerts';
 
 // DOM ELEMENTS
 const mapBox = document.getElementById('map');
-const userFormBtn = document.getElementById('userFormBtn');
 const loginForm = document.querySelector('.form--login');
 const logoutBtn = document.querySelector('.nav__el--logout');
 const userForm = document.querySelector('.form-user-data');
@@ -31,9 +30,9 @@ if (loginForm)
 if (logoutBtn) logoutBtn.addEventListener('click', logout);
 
 if (userForm)
-  userForm.addEventListener('submit', e => {
+  userForm.addEventListener('submit', async e => {
     e.preventDefault();
-    userFormBtn.textContent = 'Updating...';
+    document.getElementById('userFormBtn').textContent = 'Updating...';
     const form = new FormData();
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
@@ -41,8 +40,8 @@ if (userForm)
     form.append('email', email);
     form.append('photo', document.getElementById('photo').files[0]);
 
-    updateSettings(form, 'data');
-    userFormBtn.textContent = 'Save Settings';
+    await updateSettings(form, 'data');
+    document.getElementById('userFormBtn').textContent = 'Save Settings';
   });
 
 if (userPasswordForm)
