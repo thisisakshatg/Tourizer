@@ -52,6 +52,15 @@ exports.getTour = catchAsync(async (req, res, next) => {
     });
 });
 
+exports.signup = (req, res) => {
+  res
+    .status(200)
+    .set('Content-Security-Policy', csp)
+    .render('signup', {
+      title: 'Create New Account'
+    });
+};
+
 exports.login = (req, res) => {
   res
     .status(200)

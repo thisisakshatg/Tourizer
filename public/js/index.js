@@ -4,14 +4,16 @@ import { login, logout } from './login';
 import { updateSettings } from './updateSettings';
 import { bookTour } from './stripe';
 import { showAlert } from './alerts';
+import { signup } from './signup';
 
 // DOM ELEMENTS
 const mapBox = document.getElementById('map');
-const loginForm = document.querySelector('.form--login');
+const loginForm = document.getElementById('login-form');
 const logoutBtn = document.querySelector('.nav__el--logout');
 const userForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-settings');
 const bookBtn = document.getElementById('book-tour');
+const signupForm = document.getElementById('signup-form');
 
 // DELEGATON
 if (mapBox) {
@@ -21,6 +23,7 @@ if (mapBox) {
 
 if (loginForm)
   loginForm.addEventListener('submit', e => {
+    console.log('Inside login function!!');
     e.preventDefault();
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
@@ -29,9 +32,24 @@ if (loginForm)
 
 if (logoutBtn) logoutBtn.addEventListener('click', logout);
 
+if (signupForm) {
+  signupForm.addEventListener('submit', async e => {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const passwordConfirm = document.getElementById('passwordConfirm').value;
+
+    await signup({ name, email, password, passwordConfirm });
+  });
+}
+
 if (userForm)
   userForm.addEventListener('submit', async e => {
     e.preventDefault();
+    console.log('Inside signup function!!');
+
     document.getElementById('userFormBtn').textContent = 'Updating...';
     const form = new FormData();
     const name = document.getElementById('name').value;
@@ -46,6 +64,8 @@ if (userForm)
 
 if (userPasswordForm)
   userPasswordForm.addEventListener('submit', async e => {
+    console.log('Inside signup function!!');
+
     e.preventDefault();
     document.querySelector('.btn--save-password').textContent = 'Updating...';
     const passwordCurrent = document.getElementById('password-current').value;
@@ -61,6 +81,8 @@ if (userPasswordForm)
 
 if (bookBtn)
   bookBtn.addEventListener('click', e => {
+    console.log('Inside signup function!!');
+
     e.target.textContent = 'Processing...';
     const tourId = e.target.dataset.tourId;
     bookTour(tourId);
